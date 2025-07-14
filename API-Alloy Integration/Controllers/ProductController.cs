@@ -1,9 +1,9 @@
-﻿using API_Alloy_Integration.Data;
-using API_Alloy_Integration.Model;
+﻿using CMS_API_Integration.Data;
+using CMS_API_Integration.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API_Alloy_Integration.Controllers
+namespace CMS_API_Integration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

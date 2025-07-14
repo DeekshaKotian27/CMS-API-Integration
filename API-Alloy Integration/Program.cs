@@ -1,4 +1,4 @@
-using API_Alloy_Integration.Data;
+using CMS_API_Integration.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ProductDBContext>(
     options=>options.UseSqlServer(
-        builder.Configuration.GetConnectionString("ProductAlloyDB")));
+        builder.Configuration.GetConnectionString("ProductCMSDB")));
 
 
 var app = builder.Build();

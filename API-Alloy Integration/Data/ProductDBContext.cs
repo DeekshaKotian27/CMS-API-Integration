@@ -1,7 +1,7 @@
-﻿using API_Alloy_Integration.Model;
+﻿using CMS_API_Integration.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace API_Alloy_Integration.Data
+namespace CMS_API_Integration.Data
 {
     public class ProductDBContext: DbContext
     {
