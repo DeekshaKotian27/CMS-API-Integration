@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CMS_API_Integration.Migrations
+namespace API.Migrations
 {
     /// <inheritdoc />
     public partial class AddTableProduct : Migration

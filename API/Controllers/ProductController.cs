@@ -1,9 +1,9 @@
-﻿using CMS_API_Integration.Data;
-using CMS_API_Integration.Model;
+﻿using API.Data;
+using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CMS_API_Integration.Controllers
+namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

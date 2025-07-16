@@ -1,7 +1,7 @@
-﻿using CMS_API_Integration.Model;
+﻿using API.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace CMS_API_Integration.Data
+namespace API.Data
 {
     public class ProductDBContext: DbContext
     {

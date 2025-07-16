@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CMS_API_Integration.Model
+namespace API.Model
 {
     public class Product
     {
