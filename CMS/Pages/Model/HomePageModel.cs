@@ -2,10 +2,10 @@
 
 namespace CMS.Pages.Model
 {
-    [ContentType(DisplayName = "Start Page", 
+    [ContentType(DisplayName = "Home Page", 
         Description = "The start page of the site.",
         GUID = "733bd3a6-f7b3-456e-aa40-75b74e484c7e")]
-    public class StartPage: PageData
+    public class HomePageModel: PageData
     {
         [Display(
             Name = "Main Content Area", 

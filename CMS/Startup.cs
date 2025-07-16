@@ -29,6 +29,10 @@ namespace CMS
                 .AddCms()
                 .AddAdminUserRegistration()
                 .AddEmbeddedLocalization<Startup>();
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            }); 
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
