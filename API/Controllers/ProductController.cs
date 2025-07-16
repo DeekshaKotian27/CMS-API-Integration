@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.DTO;
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +51,7 @@ namespace API.Controllers
                 Description= productDTO.Description,
                 Amount= productDTO.Amount,
                 Quantity = productDTO.Quantity
-            }; 
+            };
             await _productDBContext.Products.AddAsync(product);
             var value = await _productDBContext.SaveChangesAsync();
             if(value == 0)

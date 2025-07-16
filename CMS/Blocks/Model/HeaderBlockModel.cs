@@ -5,7 +5,7 @@ namespace CMS.Blocks.Model
     [ContentType(DisplayName = "Header Block",
         Description = "Header for the site",
         GUID = "89b9865a-7e87-46ef-ab80-a91d09123b64")]
-    public class HeaderBlock:BlockData
+    public class HeaderBlockModel:BlockData
     {
         [Display(
             Name ="title",

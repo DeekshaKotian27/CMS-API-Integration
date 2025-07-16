@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CMS.Blocks.Controller
 {
-    public class HeaderBlockController : AsyncBlockComponent<HeaderBlock>
+    public class HeaderBlockController : AsyncBlockComponent<HeaderBlockModel>
     {
-        protected override async Task<IViewComponentResult> InvokeComponentAsync(HeaderBlock currentContent)
+        protected override async Task<IViewComponentResult> InvokeComponentAsync(HeaderBlockModel currentContent)
         {
              return View("~/Views/Blocks/HeaderBlock/Index.cshtml", currentContent);
         }

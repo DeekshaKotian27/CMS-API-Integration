@@ -1,16 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace API.Model
+﻿namespace API.DTO
 {
-    public class Product
+    public class ProductDTO
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
         public int Amount { get; set; }
         public int Quantity { get; set; }
     }
-
 }

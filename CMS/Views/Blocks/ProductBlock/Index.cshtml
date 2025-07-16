@@ -1,0 +1,16 @@
+﻿@using EPiServer.Web.Mvc.Html
+@model CMS.Blocks.ViewModel.ProductBlockViewModel
+@{
+    <table>
+    <thead>
+    <tr>
+                <th>@Html.PropertyFor(x => x.NameLabel)</th>
+                <th>@Html.PropertyFor(x => x.DescriptionLabel)</th>
+                <th>@Html.PropertyFor(x => x.AmountLabel)</th>
+                <th>@Html.PropertyFor(x => x.QunatityLabel)</th>
+
+    </tr>
+    </thead>
+    </table>
+    
+}

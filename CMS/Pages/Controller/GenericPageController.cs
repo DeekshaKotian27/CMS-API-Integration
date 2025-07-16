@@ -16,7 +16,16 @@ namespace CMS.Pages.Controller
         }
         public async Task<ActionResult> Index(GenericPageModel currentPage)
         {
-            var model = await _mediator.Send(new PageRequest<GenericPageModel, GenericPageViewModel>(currentPage));
+            var model = new GenericPageViewModel();
+            try{
+
+                model = await _mediator.Send(new PageRequest<GenericPageModel, GenericPageViewModel>(currentPage));
+
+            }
+            catch(Exception e)
+            { 
+
+            }
 
             return View("~/Views/Pages/GenericPage/Index.cshtml", model);
         }
