@@ -24,8 +24,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Folder Include="Blocks\Handler\" />
-    <Folder Include="Blocks\ViewModel\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,7 @@
-﻿@model CMS.Pages.ViewModel.GenericPageViewModel
+﻿@using EPiServer.Web.Mvc.Html
+@model CMS.Pages.ViewModel.GenericPageViewModel
 @{
     <h1>generic page</h1>
+
+    @Html.PropertyFor(x=>x.Main)
 }
