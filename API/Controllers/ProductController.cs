@@ -1,8 +1,9 @@
 ﻿using API.Data;
 using API.DTO;
 using API.Model;
+using API.Repository.Interface;
+using Azure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -10,17 +11,17 @@ namespace API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductDBContext _productDBContext;
-        public ProductController(ProductDBContext productDBContext)
+        private readonly IProductRepository _productRepository;
+        public ProductController(IProductRepository productRepository)
         {
-            _productDBContext = productDBContext;
+            _productRepository = productRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProductData()
         {
-            var data = await _productDBContext.Products.ToListAsync();
-            return Ok(data);
+            var response= await _productRepository.GetProducts();
+            return StatusCodeResult.GetStatusCode(response);
         }
 
         [HttpGet("id")]
@@ -28,14 +29,10 @@ namespace API.Controllers
         {
             if (id == 0)
             {
-                return BadRequest();
+                return StatusCodeResult.GetStatusCode(new APIResponse().FailureMessage(400,"ID missing"));
             }
-            var data = await _productDBContext.Products.FindAsync(id);
-            if(data == null)
-            {
-                return NotFound();
-            }
-            return Ok(data);
+            var data = await _productRepository.GetProductByID(id);
+            return StatusCodeResult.GetStatusCode(data);
         }
 
         [HttpPost]
@@ -43,22 +40,10 @@ namespace API.Controllers
         {
             if (productDTO == null)
             {
-                return BadRequest();
+                return StatusCodeResult.GetStatusCode(new APIResponse().FailureMessage(400, "Invalid Request"));
             }
-            var product = new Product()
-            {
-                Name = productDTO.Name,
-                Description= productDTO.Description,
-                Amount= productDTO.Amount,
-                Quantity = productDTO.Quantity
-            };
-            await _productDBContext.Products.AddAsync(product);
-            var value = await _productDBContext.SaveChangesAsync();
-            if(value == 0)
-            {
-                return BadRequest();
-            }
-            return Ok();
+            var value = await _productRepository.CreateProduct(productDTO);
+            return StatusCodeResult.GetStatusCode(value);
         }
 
         [HttpDelete("id")]
@@ -66,20 +51,10 @@ namespace API.Controllers
         {
             if (id == 0)
             {
-                return BadRequest();
+                return StatusCodeResult.GetStatusCode(new APIResponse().FailureMessage(400,"ID is required"));
             }
-            var product = await _productDBContext.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            _productDBContext.Products.Remove(product);
-            var value = await _productDBContext.SaveChangesAsync();
-            if (value == 0)
-            {
-                return BadRequest();
-            }
-            return Ok();
+            var response = await _productRepository.DeleteProduct(id);
+            return StatusCodeResult.GetStatusCode(response);
         }
 
         [HttpPut("id")]
@@ -87,24 +62,11 @@ namespace API.Controllers
         {
             if (id == 0 || productDTO == null)
             {
-                return BadRequest();
+                return StatusCodeResult.GetStatusCode(new APIResponse().FailureMessage(400, "ID/Value is null"));
             }
-            var product = await _productDBContext.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            product.Name = productDTO.Name;
-            product.Description = productDTO.Description;
-            product.Amount = productDTO.Amount;
-            product.Quantity = productDTO.Quantity;
-            _productDBContext.Products.Update(product);
-            var value = await _productDBContext.SaveChangesAsync();
-            if (value == 0)
-            {
-                return BadRequest();
-            }
-            return Ok();
+            var response= await _productRepository.UpdateProduct(id,productDTO);
+            return StatusCodeResult.GetStatusCode(response);
         }
+
     }
 }
