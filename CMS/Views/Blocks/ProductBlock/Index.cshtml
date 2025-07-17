@@ -1,16 +1,67 @@
 ﻿@using EPiServer.Web.Mvc.Html
 @model CMS.Blocks.ViewModel.ProductBlockViewModel
-@{
-    <table>
-    <thead>
-    <tr>
-                <th>@Html.PropertyFor(x => x.NameLabel)</th>
-                <th>@Html.PropertyFor(x => x.DescriptionLabel)</th>
-                <th>@Html.PropertyFor(x => x.AmountLabel)</th>
-                <th>@Html.PropertyFor(x => x.QunatityLabel)</th>
 
-    </tr>
-    </thead>
+<style>
+    #producttable {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        #producttable th, #producttable td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #producttable thead {
+            background-color: #f2f2f2;
+        }
+
+        #producttable tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #producttable tbody tr:hover {
+            background-color: #e0e0e0;
+        }
+</style>
+@{
+    <table id="producttable" >
+        <thead>
+            <tr >
+                <th>@Model.NameLabel</th>
+                <th>@Model.DescriptionLabel</th>
+                <th>@Model.AmountLabel</th>
+                <th>@Model.QunatityLabel</th>
+                <th></th>
+            </tr>
+        </thead>
+    <tbody>
+        <!-- rows will be added dynamically -->
+    </tbody>
     </table>
     
-}
+    
+    }
+<script>
+    fetch('@Model.ApiUrl')
+    .then(res=> res.json())
+    .then(data=>{
+        console.log(data)
+        const tbody= document.querySelector("#producttable tbody");
+
+        data.forEach(item=>{
+            var row= document.createElement('tr');
+
+            row.innerHTML=`
+                <td>${item.name}</td>
+                <td>${item.description}</td>
+                <td>${item.amount}</td>
+                <td>${item.quantity}</td>
+                <td><button>Edit</button><button>Delete</button></td>
+            `;
+
+            tbody.appendChild(row);
+        })
+    }).catch(err => console.error('Error:', err));
+</script>
