@@ -1,7 +1,10 @@
 ﻿@using EPiServer.Web.Mvc.Html
 @model CMS.Pages.ViewModel.GenericPageViewModel
 @{
-    <h1>generic page</h1>
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    
 
     @Html.PropertyFor(x=>x.Main)
 }

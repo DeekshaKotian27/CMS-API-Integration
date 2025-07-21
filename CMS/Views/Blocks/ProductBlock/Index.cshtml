@@ -26,6 +26,7 @@
         }
 </style>
 @{
+    <h1>@Model.Title</h1>
     <table id="producttable" >
         <thead>
             <tr >
@@ -50,7 +51,7 @@
         console.log(data)
         const tbody= document.querySelector("#producttable tbody");
 
-        data.forEach(item=>{
+        data.data.forEach(item=>{
             var row= document.createElement('tr');
 
             row.innerHTML=`

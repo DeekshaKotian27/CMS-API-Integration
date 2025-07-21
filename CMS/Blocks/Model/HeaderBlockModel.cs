@@ -13,5 +13,13 @@ namespace CMS.Blocks.Model
             Order =10
            )]
         public virtual string Title { get; set; }
+
+        [Display(
+            Name = "Links",
+            Description = "Links",
+            Order = 10
+           )]
+        [AllowedTypes( typeof( LinkBlockModel ) )]
+        public virtual ContentArea Links { get; set; }
     }
 }

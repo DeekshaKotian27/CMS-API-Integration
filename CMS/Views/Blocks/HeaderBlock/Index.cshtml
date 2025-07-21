@@ -1,7 +1,12 @@
 ﻿@using EPiServer.Web.Mvc.Html
-@model CMS.Blocks.Model.HeaderBlockModel
-@{
-    ViewData["Title"] = "Index";
-}
+@model CMS.Blocks.ViewModel.HeaderBlockViewModel
 
-@Html.PropertyFor(x=>x.Title)
+<div id="headerblock" style="background-color:palevioletred;height:auto;padding:10px">
+    <h1 style="margin: 0px;padding: 20px;">
+        @Model.Title
+    </h1>
+    @foreach(var link in Model.Links)
+    {
+        <a href=@link.URL>@link.Title</a>
+    }
+</div>

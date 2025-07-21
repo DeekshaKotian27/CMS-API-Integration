@@ -22,8 +22,4 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Translations\**\*" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Views\Shared\" />
-  </ItemGroup>
 </Project>
