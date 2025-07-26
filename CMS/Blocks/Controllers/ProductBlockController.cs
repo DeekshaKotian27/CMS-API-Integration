@@ -5,7 +5,7 @@ using EPiServer.Web.Mvc;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CMS.Blocks.Controller
+namespace CMS.Blocks.Controllers
 {
     public class ProductBlockController : AsyncBlockComponent<ProductBlockModel>
     {

@@ -8,7 +8,7 @@ namespace CMS.Pages.Controller
     {
         public IActionResult Index(HomePageModel currentPage)
         {
-            //var model = new HomePageVi(currentPage);
+            ViewBag.Title = "Home Page";
             return View("~/Views/Pages/HomePage/Index.cshtml",currentPage);
         }
     }

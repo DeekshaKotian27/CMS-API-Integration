@@ -1,8 +1,6 @@
-﻿using API.Data;
-using API.DTO;
+﻿using API.DTO;
 using API.Model;
 using API.Repository.Interface;
-using Azure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

@@ -1,16 +1,44 @@
 ﻿@using EPiServer.Web.Mvc.Html
 @model CMS.Blocks.ViewModel.ProductBlockViewModel
-@{
-    <table>
-    <thead>
-    <tr>
-                <th>@Html.PropertyFor(x => x.NameLabel)</th>
-                <th>@Html.PropertyFor(x => x.DescriptionLabel)</th>
-                <th>@Html.PropertyFor(x => x.AmountLabel)</th>
-                <th>@Html.PropertyFor(x => x.QunatityLabel)</th>
 
-    </tr>
-    </thead>
-    </table>
-    
+@{
+    <h1 class="text-primary text-center mb-4">@Model.Title</h1>
+
+    <div class="container">
+        <div class="row" id="productCardsContainer">
+            <!-- Cards will be injected here -->
+        </div>
+    </div>
 }
+
+<script>
+    fetch('@Model.ApiUrl')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            const container = document.getElementById("productCardsContainer");
+
+            data.data.forEach(item => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-4'; // 3 in a row for medium+
+
+                col.innerHTML = `
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">${item.name}</h5>
+                            <p class="card-text">${item.description}</p>
+                            <p class="card-text"><strong>Amount:</strong> ₹${item.amount}</p>
+                            <p class="card-text"><strong>Quantity:</strong> ${item.quantity}</p>
+                        </div>
+                        <div class="card-footer text-end bg-white border-top-0">
+                            <button class="btn btn-sm btn-outline-primary me-2">Edit</button>
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(col);
+            });
+        })
+        .catch(err => console.error('Error:', err));
+</script>

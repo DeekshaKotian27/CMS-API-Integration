@@ -22,6 +22,7 @@ namespace CMS.Blocks.Handler
 
             var model= new ProductBlockViewModel()
             {
+                Title=block.Title,
                 NameLabel = block.NameLabel,
                 DescriptionLabel= block.DescriptionLabel,
                 AmountLabel = block.AmountLabel,

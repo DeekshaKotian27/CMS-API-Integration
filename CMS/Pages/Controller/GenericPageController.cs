@@ -26,7 +26,7 @@ namespace CMS.Pages.Controller
             { 
 
             }
-
+            ViewBag.Title = "Product Page";
             return View("~/Views/Pages/GenericPage/Index.cshtml", model);
         }
     }

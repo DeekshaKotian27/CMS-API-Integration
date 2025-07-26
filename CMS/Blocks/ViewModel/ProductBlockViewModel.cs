@@ -9,5 +9,6 @@ namespace CMS.Blocks.ViewModel
         public string AmountLabel { get; set; }
         public string QunatityLabel {  get; set; }
         public string ApiUrl { get; set; }
+        public string Title { get; set; }
     }
 }

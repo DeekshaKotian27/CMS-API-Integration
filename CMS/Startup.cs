@@ -1,3 +1,4 @@
+using CMS.APIServices;
 using EPiServer.Cms.Shell;
 using EPiServer.Cms.UI.AspNetIdentity;
 using EPiServer.Scheduler;
@@ -32,7 +33,8 @@ namespace CMS
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
-            }); 
+            });
+            services.AddScoped<IAPIBaseService, APIBaseService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -47,9 +49,12 @@ namespace CMS
             app.UseAuthentication();
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapContent();
+                endpoints.MapDefaultControllerRoute();
+
             });
         }
     }

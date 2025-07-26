@@ -9,6 +9,12 @@ namespace CMS.Blocks.Model
     public class ProductBlockModel: BlockData
     {
         [Display(
+            Name = "Title",
+            Description = "Title",
+            Order = 1)]
+        public virtual string Title { get; set; }
+
+        [Display(
             Name ="Product name label",
             Description ="Label for product name",
             Order =10)]
