@@ -1,68 +1,44 @@
 ﻿@using EPiServer.Web.Mvc.Html
 @model CMS.Blocks.ViewModel.ProductBlockViewModel
 
-<style>
-    #producttable {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-        #producttable th, #producttable td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-
-        #producttable thead {
-            background-color: #f2f2f2;
-        }
-
-        #producttable tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        #producttable tbody tr:hover {
-            background-color: #e0e0e0;
-        }
-</style>
 @{
-    <h1>@Model.Title</h1>
-    <table id="producttable" >
-        <thead>
-            <tr >
-                <th>@Model.NameLabel</th>
-                <th>@Model.DescriptionLabel</th>
-                <th>@Model.AmountLabel</th>
-                <th>@Model.QunatityLabel</th>
-                <th></th>
-            </tr>
-        </thead>
-    <tbody>
-        <!-- rows will be added dynamically -->
-    </tbody>
-    </table>
-    
-    
-    }
+    <h1 class="text-primary text-center mb-4">@Model.Title</h1>
+
+    <div class="container">
+        <div class="row" id="productCardsContainer">
+            <!-- Cards will be injected here -->
+        </div>
+    </div>
+}
+
 <script>
     fetch('@Model.ApiUrl')
-    .then(res=> res.json())
-    .then(data=>{
-        console.log(data)
-        const tbody= document.querySelector("#producttable tbody");
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            const container = document.getElementById("productCardsContainer");
 
-        data.data.forEach(item=>{
-            var row= document.createElement('tr');
+            data.data.forEach(item => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4 mb-4'; // 3 in a row for medium+
 
-            row.innerHTML=`
-                <td>${item.name}</td>
-                <td>${item.description}</td>
-                <td>${item.amount}</td>
-                <td>${item.quantity}</td>
-                <td><button>Edit</button><button>Delete</button></td>
-            `;
+                col.innerHTML = `
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">${item.name}</h5>
+                            <p class="card-text">${item.description}</p>
+                            <p class="card-text"><strong>Amount:</strong> ₹${item.amount}</p>
+                            <p class="card-text"><strong>Quantity:</strong> ${item.quantity}</p>
+                        </div>
+                        <div class="card-footer text-end bg-white border-top-0">
+                            <button class="btn btn-sm btn-outline-primary me-2">Edit</button>
+                            <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        </div>
+                    </div>
+                `;
 
-            tbody.appendChild(row);
+                container.appendChild(col);
+            });
         })
-    }).catch(err => console.error('Error:', err));
+        .catch(err => console.error('Error:', err));
 </script>

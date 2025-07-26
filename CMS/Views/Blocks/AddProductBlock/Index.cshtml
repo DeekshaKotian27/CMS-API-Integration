@@ -1,0 +1,71 @@
+﻿@model CMS.Blocks.ViewModel.AddProductBlockViewModel
+@{
+    <div class="pt-2">
+    <h1 class="text-primary text-center">Add Product</h1>
+        <form id="AddProduct" class="container border border-2 rounded-3 p-3">
+        <div class="mb-3">
+            @Html.AntiForgeryToken()
+            <div class="pb-2">
+                <label for="Name" class="form-label">@Model.NameLabel</label>
+                <input type="text" class="form-control" id="Name" name="Name" required placeholder="@Model.NamePlacehoderText" />
+            </div>
+            <div class="pb-2">
+                <label for="Description" class="form-label">@Model.DescriptionLabel</label>
+                <textarea name="Description" class="form-control" id="Description" required placeholder="@Model.DescriptionPlacehoderText"></textarea>
+            </div>
+            <div class="pb-2">
+                <label for="Amount" class="form-label">@Model.AmountLabel</label>
+                <input type="number" class="form-control" name="Amount" id="Amount" required placeholder="@Model.AmountPlacehoderText" />
+            </div>
+            <div class="pb-2">
+                <label for="Quantity" class="form-label">@Model.QunatityLabel</label>
+                <input type="number" class="form-control" name="Quantity" id="Quantity" required placeholder="@Model.QunatityPlacehoderTextl" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Create Product</button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    <script>
+        document.getElementById('AddProduct').addEventListener('submit',async function(event){
+            event.preventDefault();
+
+            const form=event.target;
+            const data={
+                Name:form.Name.value,
+                Description:form.Description.value,
+                Amount: parseFloat(form.Amount.value),
+                Quantity: parseInt(form.Quantity.value),
+                ApiURL: '@Model.ApiUrl',
+                RedirectPageURL: '@Model.RedirectPageURL'
+            };
+            try{
+
+                var response= await fetch('/AddProduct/CreateProduct',{
+                    method:"POST",
+                    headers:{
+                            'Content-Type': 'application/json',
+                            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body:JSON.stringify(data)
+                });
+                if(response.ok)
+                {
+                    console.log("success");
+                    alert("Product added succesfully");
+                    if (data.RedirectPageURL)
+                        window.location.href = data.RedirectPageURL;
+                }
+                else{
+                        console.log(response.body.ErrorMessage);
+                        alert(response.body.ErrorMessage);
+                }
+            }
+                catch (err) {
+                console.error('Fetch error:', err);
+            }
+        });
+    </script>
+}
